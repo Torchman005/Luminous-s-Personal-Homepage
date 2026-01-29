@@ -1,0 +1,120 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  /* Light mode defaults (using Coolors palette) */
+  --background: #d4afcd; /* Thistle - Light Background */
+  --foreground: #212738; /* Dark Jungle Green - Text */
+  --accent-primary: #779cab; /* Shadow Blue */
+  --accent-secondary: #404e5c; /* Independence */
+  --highlight: #a2e8dd; /* Non Photo Blue */
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-highlight: rgba(255, 255, 255, 0.3);
+}
+
+.dark {
+  /* Dark mode overrides */
+  --background: #212738; /* Dark Jungle Green - Dark Background */
+  --foreground: #d4afcd; /* Thistle - Text */
+  --accent-primary: #a2e8dd; /* Non Photo Blue */
+  --accent-secondary: #779cab; /* Shadow Blue */
+  --highlight: #404e5c; /* Independence */
+  --glass-bg: rgba(0, 0, 0, 0.2);
+  --glass-border: rgba(255, 255, 255, 0.05);
+  --glass-highlight: rgba(255, 255, 255, 0.1);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-accent-primary: var(--accent-primary);
+  --color-accent-secondary: var(--accent-secondary);
+  --color-highlight: var(--highlight);
+  --color-glass-bg: var(--glass-bg);
+  --color-glass-border: var(--glass-border);
+  --color-glass-highlight: var(--glass-highlight);
+  
+  /* Marquee Animations */
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(calc(-100% - var(--gap))); }
+  }
+  @keyframes marquee-vertical {
+    from { transform: translateY(0); }
+    to { transform: translateY(calc(-100% - var(--gap))); }
+  }
+  
+  --animate-marquee: marquee var(--duration) linear infinite;
+  --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
+}
+
+html {
+  background: transparent;
+}
+
+body {
+  background: transparent;
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), sans-serif;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+.glow-text {
+  text-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+}
+
+/* View Transitions API Customization */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+/* 确保在深色模式下，新的视图在旧的视图之上 */
+::view-transition-new(root) {
+  z-index: 2147483646;
+}
+::view-transition-old(root) {
+  z-index: 2147483646;
+}
+
+/* Hide Next.js Dev Indicator */
+[data-nextjs-toast], 
+div[class*="nextjs-toast"], 
+#__next-build-activity-indicator,
+nextjs-portal,
+.nextjs-toast-errors-parent {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
