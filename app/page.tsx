@@ -1,7 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
-import Social from "@/components/Social";
 import Experience from "@/components/Experience";
 import Resources from "@/components/Resources";
 import Dynamics from "@/components/Dynamics";
@@ -16,7 +15,6 @@ export default function Home() {
       <About />
       <IllustrationGallery />
       <AnimeShare />
-      <Social />
       <Experience />
       <Resources />
       <Dynamics />

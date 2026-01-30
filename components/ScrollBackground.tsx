@@ -5,8 +5,7 @@ import { useEffect, useState } from "react"
 import { useTheme } from "next-themes"
 
 // 默认背景配置
-// 使用说明：
-// 1. 将您的图片文件（如 .jpg, .png）放入 public/backgrounds 文件夹
+// 1. 将图片文件（如 .jpg, .png）放入 public/backgrounds 文件夹
 // 2. 修改下方的 DARK_IMAGES 和 LIGHT_IMAGES 数组，将 src 改为 "/backgrounds/您的文件名.jpg"
 
 // 深色模式背景
@@ -25,6 +24,11 @@ const DARK_IMAGES = [
     type: "gradient",
     value: "linear-gradient(to bottom right, #064e3b, #14532d)", // 深绿
     src: "/backgrounds/dark-3.jpg"
+  },
+  {
+    type: "gradient",
+    value: "linear-gradient(to bottom right, #f3db7a, #f3db7a)", // 黄色
+    src: "/backgrounds/dark-4.jpg"
   }
 ]
 
@@ -44,6 +48,11 @@ const LIGHT_IMAGES = [
     type: "gradient",
     value: "linear-gradient(to bottom right, #d1fae5, #fef08a)", // 浅绿 -> 浅黄
     src: "/backgrounds/light-3.jpg"
+  },
+  {
+    type: "gradient",
+    value: "linear-gradient(to bottom right, #f3db7a, #f3db7a)", // 黄色
+    src: "/backgrounds/light-4.jpg"
   }
 ]
 

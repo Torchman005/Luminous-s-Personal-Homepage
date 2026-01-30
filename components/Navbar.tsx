@@ -10,7 +10,6 @@ const links = [
   { name: '关于我', href: '#about' },
   { name: '插画', href: '#gallery' },
   { name: '动漫', href: '#anime' },
-  { name: '社交', href: '#social' },
   { name: '经历', href: '#experience' },
   { name: '资源', href: '#resources' },
   { name: '动态', href: '#dynamic' },
