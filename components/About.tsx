@@ -78,7 +78,7 @@ export default function About() {
                   </div>
                 </div>
 
-                <div className="flex gap-5 relative z-20 pt-6 border-t border-glass-border w-full justify-center">
+                <div className="flex flex-wrap gap-4 sm:gap-5 relative z-20 pt-6 border-t border-glass-border w-full justify-center">
                   {socials.map((item) => (
                     <a
                       key={item.name}

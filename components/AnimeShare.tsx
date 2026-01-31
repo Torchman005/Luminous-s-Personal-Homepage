@@ -164,14 +164,14 @@ export default function AnimeShare() {
         </Marquee>
         
         {/* Progressive Blur Effect - Left */}
-        <div className="pointer-events-none absolute inset-y-0 left-0 w-1/3 z-10">
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-12 md:w-1/3 z-10">
           <div className="absolute inset-0 backdrop-blur-[1px] [mask-image:linear-gradient(to_right,black,transparent)]" />
           <div className="absolute inset-0 backdrop-blur-[2px] [mask-image:linear-gradient(to_right,black_10%,transparent)]" />
           <div className="absolute inset-0 backdrop-blur-[4px] [mask-image:linear-gradient(to_right,black_20%,transparent)]" />
         </div>
 
         {/* Progressive Blur Effect - Right */}
-        <div className="pointer-events-none absolute inset-y-0 right-0 w-1/3 z-10">
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-12 md:w-1/3 z-10">
           <div className="absolute inset-0 backdrop-blur-[1px] [mask-image:linear-gradient(to_left,black,transparent)]" />
           <div className="absolute inset-0 backdrop-blur-[2px] [mask-image:linear-gradient(to_left,black_10%,transparent)]" />
           <div className="absolute inset-0 backdrop-blur-[4px] [mask-image:linear-gradient(to_left,black_20%,transparent)]" />
