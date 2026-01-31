@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { Highlight } from '@/components/ui/hero-highlight';
 import { FocusCard } from '@/components/ui/focus-cards';
+import { SparklesCore } from '@/components/ui/sparkles';
 
 const socials = [
   { name: 'GitHub', icon: Github, href: 'https://github.com/Torchman005', color: 'hover:text-foreground' },
@@ -42,7 +43,19 @@ export default function About() {
         <div className="flex justify-center">
           <div className="relative w-full max-w-2xl">
             <FocusCard>
-              <div className="px-8 py-12 flex flex-col items-center">
+              <div className="px-8 py-12 flex flex-col items-center relative">
+                {/* Sparkles for fun */}
+                <div className="absolute inset-0 w-full h-full pointer-events-none">
+                  <SparklesCore
+                    id="tsparticlesfullpage"
+                    background="transparent"
+                    minSize={0.6}
+                    maxSize={1.4}
+                    particleDensity={50}
+                    className="w-full h-full"
+                    particleColor="#FFFFFF"
+                  />
+                </div>
                 {/* Avatar */}
                 <div className="relative w-24 h-24 mb-6 rounded-full overflow-hidden border-4 border-accent-primary/30 shadow-lg group">
                   <Image 
