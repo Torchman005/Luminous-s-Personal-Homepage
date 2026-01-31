@@ -22,7 +22,7 @@ export async function GET(request: NextRequest) {
     const picture = metadata.common.picture?.[0];
 
     if (picture) {
-      return new NextResponse(picture.data, {
+      return new NextResponse(Buffer.from(picture.data), {
         headers: {
           'Content-Type': picture.format,
           'Cache-Control': 'public, max-age=31536000, immutable',
