@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import Marquee from "@/components/ui/marquee";
 import { ExternalLink } from "lucide-react";
 
-// 示例动漫数据，您可以稍后替换为真实数据
 const ANIME_LIST = [
   {
     title: "GOSICK",
@@ -152,7 +151,7 @@ export default function AnimeShare() {
           </h2>
           <div className="w-20 h-1 bg-accent-primary mx-auto rounded-full" />
           <p className="mt-4 text-foreground/70">
-            精选好番推荐，记录感动瞬间
+            "感谢ACG一直以来给我的感动"
           </p>
         </motion.div>
       </div>
