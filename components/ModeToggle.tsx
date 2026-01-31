@@ -55,7 +55,7 @@ export function ModeToggle() {
 
       // 在新视图上执行动画（如果是切换到暗色，则是在 dark view 上扩撒；如果是切到亮色，则是在 light view 上扩散）
       // 注意：View Transition API 的默认行为是 old 视图淡出，new 视图淡入。
-      // 我们需要禁用默认的淡入淡出，改为使用 clip-path 动画。
+      // 需要禁用默认的淡入淡出，改为使用 clip-path 动画。
       // 具体的 CSS 动画控制通常在全局 CSS 中定义，但这里我们使用 JS 动画 API (animate) 来精确控制坐标
       
       document.documentElement.animate(

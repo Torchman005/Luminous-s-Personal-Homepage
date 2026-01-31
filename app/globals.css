@@ -4,7 +4,7 @@
 
 :root {
   /* Light mode defaults (using Coolors palette) */
-  --background: #d4afcd; /* Thistle - Light Background */
+  --background: #f0f4f8; /* Alice Blue - Light Background */
   --foreground: #212738; /* Dark Jungle Green - Text */
   --accent-primary: #779cab; /* Shadow Blue */
   --accent-secondary: #404e5c; /* Independence */
@@ -48,6 +48,26 @@
   
   --animate-marquee: marquee var(--duration) linear infinite;
   --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
+  
+  /* Ripple Animation */
+  @keyframes ripple {
+    0%, 100% {
+      transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+      transform: translate(-50%, -50%) scale(0.9);
+    }
+  }
+  
+  --animate-ripple: ripple var(--duration,2s) ease calc(var(--i, 0)*.2s) infinite;
+
+  /* Meteor Animation */
+  @keyframes meteor {
+    0% { transform: rotate(215deg) translateX(0); opacity: 1; }
+    70% { opacity: 1; }
+    100% { transform: rotate(215deg) translateX(-500px); opacity: 0; }
+  }
+  --animate-meteor-effect: meteor 5s linear infinite;
 }
 
 html {
@@ -117,4 +137,22 @@ nextjs-portal,
   visibility: hidden !important;
   opacity: 0 !important;
   pointer-events: none !important;
+}
+
+/* Dot Background Patterns for HeroHighlight */
+.bg-dot-thick-neutral-300 {
+  background-image: radial-gradient(#d4d4d4 2px, transparent 2px);
+  background-size: 16px 16px;
+}
+.dark .bg-dot-thick-neutral-800 {
+  background-image: radial-gradient(#262626 2px, transparent 2px);
+  background-size: 16px 16px;
+}
+.bg-dot-thick-indigo-500 {
+  background-image: radial-gradient(#6366f1 2px, transparent 2px);
+  background-size: 16px 16px;
+}
+.dark .bg-dot-thick-indigo-500 {
+  background-image: radial-gradient(#6366f1 2px, transparent 2px);
+  background-size: 16px 16px;
 }

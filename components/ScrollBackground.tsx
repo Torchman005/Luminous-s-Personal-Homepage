@@ -1,153 +1,155 @@
 "use client"
 
-import { useScroll, useTransform, motion, MotionValue } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 import { useEffect, useState } from "react"
 import { useTheme } from "next-themes"
-
-// 默认背景配置
-// 1. 将图片文件（如 .jpg, .png）放入 public/backgrounds 文件夹
-// 2. 修改下方的 DARK_IMAGES 和 LIGHT_IMAGES 数组，将 src 改为 "/backgrounds/您的文件名.jpg"
+import LightRays from "@/components/magicui/light-rays"
+import Ripple from "@/components/magicui/ripple"
+import { useActiveSection } from "@/context/ActiveSectionContext"
 
 // 深色模式背景
 const DARK_IMAGES = [
   {
-    type: "gradient",
-    value: "linear-gradient(to bottom right, #1a1b4b, #312e81)", // 深靛蓝
-    src: "/backgrounds/dark-1.jpg"
+    type: "gradient", // 首页占位，实际显示 LightRays
+    value: "transparent", 
+    src: ""
   },
   {
     type: "gradient", 
-    value: "linear-gradient(to bottom right, #4c1d95, #831843)", // 深紫 -> 深红
-    src: "/backgrounds/dark-2.jpg"
+    value: "linear-gradient(to bottom right, #4c1d95, #831843)",
+    src: "/backgrounds/dark-1.jpg"
   },
   {
     type: "gradient",
-    value: "linear-gradient(to bottom right, #064e3b, #14532d)", // 深绿
+    value: "linear-gradient(to bottom right, #064e3b, #14532d)",
+    src: "/backgrounds/dark-2.png"
+  },
+  {
+    type: "gradient",
+    value: "linear-gradient(to bottom right, #450a0a, #7f1d1d)",
     src: "/backgrounds/dark-3.jpg"
   },
   {
     type: "gradient",
-    value: "linear-gradient(to bottom right, #f3db7a, #f3db7a)", // 黄色
+    value: "linear-gradient(to bottom right, #172554, #1e3a8a)",
     src: "/backgrounds/dark-4.jpg"
+  },
+  {
+    type: "gradient",
+    value: "linear-gradient(to bottom right, #0f172a, #1e293b)",
+    src: "/backgrounds/dark-5.jpeg"
+  },
+  {
+    type: "gradient",
+    value: "linear-gradient(to bottom right, #1c1917, #334155)",
+    src: "/backgrounds/dark-6.jpg"
   }
 ]
 
 // 浅色模式背景
 const LIGHT_IMAGES = [
   {
-    type: "gradient",
-    value: "linear-gradient(to bottom right, #e0e7ff, #cffafe)", // 浅蓝 -> 浅青
-    src: "/backgrounds/light-1.jpg"
+    type: "gradient", // 首页占位，实际显示 LightRays
+    value: "transparent",
+    src: ""
   },
   {
     type: "gradient", 
-    value: "linear-gradient(to bottom right, #f3e8ff, #fce7f3)", // 浅紫 -> 浅粉
+    value: "linear-gradient(to bottom right, #e0f2fe, #f0f9ff)", // Sky Blue
+    src: "/backgrounds/light-1.jpg"
+  },
+  {
+    type: "gradient",
+    value: "linear-gradient(to bottom right, #f0fdf4, #dcfce7)", // Green/Mint
     src: "/backgrounds/light-2.jpg"
   },
   {
     type: "gradient",
-    value: "linear-gradient(to bottom right, #d1fae5, #fef08a)", // 浅绿 -> 浅黄
+    value: "linear-gradient(to bottom right, #f5f3ff, #ede9fe)", // Violet
     src: "/backgrounds/light-3.jpg"
   },
   {
     type: "gradient",
-    value: "linear-gradient(to bottom right, #f3db7a, #f3db7a)", // 黄色
+    value: "linear-gradient(to bottom right, #fdf4ff, #fae8ff)", // Pink/Fuchsia for Music
     src: "/backgrounds/light-4.jpg"
+  },
+  {
+    type: "gradient",
+    value: "linear-gradient(to bottom right, #eff6ff, #dbeafe)", // Blue
+    src: "/backgrounds/light-5.jpg"
+  },
+  {
+    type: "gradient",
+    value: "linear-gradient(to bottom right, #fafafa, #f4f4f5)", // Gray
+    src: "/backgrounds/light-6.jpg"
   }
 ]
 
-// 独立的背景层组件
-function BackgroundLayer({ 
-  bg, 
-  index, 
-  total, 
-  scrollYProgress, 
-  theme 
-}: { 
-  bg: any, 
-  index: number, 
-  total: number, 
-  scrollYProgress: MotionValue<number>, 
-  theme: string | undefined 
-}) {
-  // 计算当前图的淡入区间
-  const transitionCount = total - 1
-  const segmentSize = 1 / transitionCount
-  const fadeStart = (index - 1) * segmentSize
-  const fadeEnd = index * segmentSize
-
-  // 1. Hero 背景 (index === 0) 清晰不透明
-  // 2. 后续背景 (index > 0) 模糊，类似毛玻璃
-  // 3. 随着页面下拉，后续背景从底部逐渐浮现 (使用 y 轴变换 和 opacity)
-
-  const opacity = useTransform(
-    scrollYProgress,
-    index === 0 ? [0, segmentSize] : [fadeStart, fadeEnd],
-    index === 0 ? [1, 0] : [0, 1]
-  );
-
-  const y = useTransform(
-    scrollYProgress,
-    index === 0 ? [0, 1] : [fadeStart, fadeEnd],
-    index === 0 ? ["0%", "20%"] : ["0%", "0%"]
-  );
-  
-  const blurValue = index === 0 ? "0px" : "8px";
-
-  return (
-    <motion.div
-      style={{ opacity, y }}
-      className="absolute inset-0 w-full h-full transition-opacity duration-500"
-    >
-      {/* 渐变层 */}
-      <div 
-        className="absolute inset-0 w-full h-full" 
-        style={{ background: bg.value }} 
-      />
-      
-      {/* 图片层 */}
-      <img 
-         src={bg.src}
-         alt={`Background ${index + 1}`}
-         className="absolute inset-0 w-full h-full object-cover"
-         style={{ filter: `blur(${blurValue})` }}
-      />
-      
-      {/* 遮罩层 */}
-      <div className={`absolute inset-0 ${theme === 'dark' ? 'bg-black/20' : 'bg-white/10'}`} />
-    </motion.div>
-  )
-}
-
 export function ScrollBackground() {
-  const { theme } = useTheme()
+  const { resolvedTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
+  const { activeSection } = useActiveSection()
   
   useEffect(() => {
     setMounted(true)
   }, [])
 
-  const { scrollYProgress } = useScroll()
-  
-  // 避免服务端渲染不匹配
   if (!mounted) return null
   
-  const images = theme === 'dark' ? DARK_IMAGES : LIGHT_IMAGES
+  const images = resolvedTheme === 'dark' ? DARK_IMAGES : LIGHT_IMAGES
+  const currentBg = images[Math.min(activeSection, images.length - 1)]
 
   return (
-    <div 
-      className="fixed inset-0 z-[-1] w-full h-full pointer-events-none transition-colors duration-500"
-    >
-      {images.map((bg, index) => (
-        <BackgroundLayer
-          key={index}
-          bg={bg}
-          index={index}
-          total={images.length}
-          scrollYProgress={scrollYProgress}
-          theme={theme}
-        />
-      ))}
+    <div className="fixed inset-0 z-[-1] w-full h-full pointer-events-none bg-background overflow-hidden">
+      <AnimatePresence mode="popLayout">
+        <motion.div
+          key={activeSection}
+          initial={{ opacity: 0, scale: 1.1, filter: "blur(10px)" }}
+          animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+          exit={{ opacity: 0, scale: 0.95, filter: "blur(10px)" }}
+          transition={{ duration: 0.8, ease: "easeInOut" }}
+          className="absolute inset-0 w-full h-full"
+        >
+          {activeSection === 0 ? (
+            // 首页特殊处理
+            <div className="absolute inset-0 w-full h-full">
+              {resolvedTheme === 'dark' ? (
+                <>
+                 <LightRays 
+                  opacity={0.3} 
+                  duration={40}
+                  className="opacity-50 dark:opacity-30"
+                />
+                <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] rounded-full bg-accent-primary/20 blur-[120px] animate-pulse" />
+                <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] rounded-full bg-accent-secondary/20 blur-[120px] animate-pulse" style={{ animationDelay: '2s' }} />
+                </>
+              ) : (
+                <Ripple 
+                  mainCircleSize={200}
+                  mainCircleOpacity={0.4}
+                  numCircles={8}
+                />
+              )}
+            </div>
+          ) : (
+            // 普通页面背景图
+            <>
+              <div 
+                className="absolute inset-0 w-full h-full" 
+                style={{ background: currentBg?.value }} 
+              />
+              {currentBg?.src && (
+                <img 
+                  src={currentBg.src}
+                  alt={`Background ${activeSection}`}
+                  className="absolute inset-0 w-full h-full object-cover opacity-60"
+                />
+              )}
+              <div className={`absolute inset-0 ${resolvedTheme === 'dark' ? 'bg-black/40' : 'bg-white/30'}`} />
+            </>
+          )}
+        </motion.div>
+      </AnimatePresence>
     </div>
   )
 }

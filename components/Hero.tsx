@@ -26,10 +26,6 @@ export default function Hero() {
 
   return (
     <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Orbs */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-accent-primary/20 rounded-full blur-3xl -z-10 animate-pulse" style={{ animationDuration: '4s' }} />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent-secondary/20 rounded-full blur-3xl -z-10 animate-pulse" style={{ animationDuration: '6s', animationDelay: '1s' }} />
-
       <div className="text-center z-10 px-4 w-full max-w-5xl mx-auto">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
@@ -49,7 +45,7 @@ export default function Hero() {
           transition={{ delay: 0.5, duration: 0.8 }}
           className="text-xl md:text-2xl text-foreground/60 font-light tracking-wide mb-8"
         >
-          探索 · 创造 · 分享
+          HELLO WORLD!
         </motion.p>
         
         <motion.div

@@ -10,7 +10,7 @@ const links = [
   { name: '关于我', href: '#about' },
   { name: '插画', href: '#gallery' },
   { name: '动漫', href: '#anime' },
-  { name: '经历', href: '#experience' },
+  { name: '音乐', href: '#music-share' },
   { name: '资源', href: '#resources' },
   { name: '动态', href: '#dynamic' },
   { name: '博客', href: 'https://luminous.blog/', external: true },
@@ -44,7 +44,7 @@ export default function Navbar() {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 glass-card border-b-0 border-t-0 border-l-0 border-r-0 border-b-glass-border bg-glass-bg/80">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full px-4 sm:px-8 lg:px-12">
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0">
             <a href="#" className="text-xl font-bold tracking-wider text-accent-primary glow-text" onClick={(e) => handleScroll(e, '#home')}>
@@ -52,7 +52,7 @@ export default function Navbar() {
             </a>
           </div>
           <div className="hidden md:block">
-            <div className="ml-4 flex items-center space-x-4 lg:space-x-8">
+            <div className="flex items-center space-x-4 lg:space-x-8">
               {links.map((link) => (
                 <a
                   key={link.name}
