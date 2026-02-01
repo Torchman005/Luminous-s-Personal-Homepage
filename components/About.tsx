@@ -87,7 +87,7 @@ export default function About() {
                   </div>
                   <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-pink-500/10 text-pink-500 border border-pink-500/20">
                     <Heart size={18} />
-                    <span className="font-medium">UI/UX 设计</span>
+                    <span className="font-medium">AI agent</span>
                   </div>
                 </div>
 

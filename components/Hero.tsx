@@ -57,7 +57,7 @@ export default function Hero() {
           <InteractiveHoverButton onClick={(e) => handleScroll(e, '#about')}>
             了解更多
           </InteractiveHoverButton>
-          <InteractiveHoverButton onClick={() => window.open('https://luminous.blog/', '_blank')}>
+          <InteractiveHoverButton onClick={() => window.open('https://blog.luminous.blog/', '_blank')}>
             访问博客
           </InteractiveHoverButton>
         </motion.div>

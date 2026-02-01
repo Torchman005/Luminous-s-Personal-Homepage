@@ -13,7 +13,7 @@ const links = [
   { name: '音乐', href: '#music-share' },
   { name: '资源', href: '#resources' },
   { name: '动态', href: '#dynamic' },
-  { name: '博客', href: 'https://luminous.blog/', external: true },
+  { name: '博客', href: 'https://blog.luminous.blog/', external: true },
 ];
 
 export default function Navbar() {
