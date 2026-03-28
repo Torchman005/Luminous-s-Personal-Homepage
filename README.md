@@ -1,6 +1,6 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-Preview: https://www.luminous.blog/
+Preview: https://www.luminous.blog
 
 ## Getting Started
 
